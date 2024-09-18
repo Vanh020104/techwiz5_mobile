@@ -17,6 +17,38 @@ class SignUpForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
+
+          
+          TextFormField(
+            onSaved: (username) {
+              // username
+            },
+            validator: passwordValidator.call,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "User Name",
+              prefixIcon: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+                child: SvgPicture.asset(
+                  "assets/icons/Man.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .color!
+                        .withOpacity(0.3),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ),
+          ),
+       
+
+        const SizedBox(height: defaultPadding),
           TextFormField(
             onSaved: (emal) {
               // Email
@@ -45,6 +77,9 @@ class SignUpForm extends StatelessWidget {
               ),
             ),
           ),
+          
+            
+
           const SizedBox(height: defaultPadding),
           TextFormField(
             onSaved: (pass) {

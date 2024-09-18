@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             Image.asset(
-              "assets/images/login_dark.png",
+               "assets/images/banner01.webp",
               fit: BoxFit.cover,
             ),
             Padding(
@@ -55,29 +55,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? size.height * 0.1
                         : defaultPadding,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            entryPointScreenRoute,
-                            ModalRoute.withName(logInScreenRoute));
-                      }
-                    },
-                    child: const Text("Log in"),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Don't have an account?"),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, signUpScreenRoute);
-                        },
-                        child: const Text("Sign up"),
-                      )
-                    ],
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     if (_formKey.currentState!.validate()) {
+                  //       Navigator.pushNamedAndRemoveUntil(
+                  //           context,
+                  //           entryPointScreenRoute,
+                  //           ModalRoute.withName(logInScreenRoute));
+                  //     }
+                  //   },
+                  //   child: const Text("Log in"),
+                  // ),
+                  
                 ],
               ),
             )

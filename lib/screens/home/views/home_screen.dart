@@ -15,6 +15,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final String? successMessage = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (successMessage != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(successMessage)),
+        );
+      });
+    }
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(

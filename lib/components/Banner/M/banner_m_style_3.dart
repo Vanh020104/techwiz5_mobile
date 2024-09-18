@@ -9,7 +9,7 @@ import '../../../constants.dart';
 class BannerMStyle3 extends StatelessWidget {
   const BannerMStyle3({
     super.key,
-    this.image = "https://i.imgur.com/8REExBV.png",
+    this.image = "https://manhan.vn/wp-content/uploads/2020/06/mau-anh-banner-slider-danh-cho-website-noi-that-5.jpg.webp",
     required this.title,
     required this.press,
     required this.discountParcent,

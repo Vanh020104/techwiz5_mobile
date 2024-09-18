@@ -74,7 +74,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   );
     case logInScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
+        builder: (context) =>  LoginScreen(),
       );
     case signUpScreenRoute:
       return MaterialPageRoute(

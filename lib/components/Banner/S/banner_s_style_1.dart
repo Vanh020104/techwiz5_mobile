@@ -8,7 +8,7 @@ import 'banner_s.dart';
 class BannerSStyle1 extends StatelessWidget {
   const BannerSStyle1({
     super.key,
-    this.image = "https://i.imgur.com/K41Mj7C.png",
+    this.image = "https://manhan.vn/wp-content/uploads/2020/06/mau-anh-banner-slider-danh-cho-website-noi-that-6.jpg.webp",
     required this.title,
     required this.press,
     this.subtitle,
