@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop/models/login_model.dart';
 import 'package:shop/route/route_constants.dart';
-import 'package:shop/service/login_service.dart';
+import 'package:shop/services/login_service.dart';
 import '../../../../constants.dart';
 
 class LogInForm extends StatefulWidget {
