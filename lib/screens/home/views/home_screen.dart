@@ -43,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                     title: "New \narrival",
                     subtitle: "SPECIAL OFFER",
                     discountParcent: 50,
+                    
                     press: () {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },

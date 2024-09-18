@@ -1,66 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop/route/screen_export.dart';
+import 'package:shop/services/CategoryService.dart';
+
+import 'package:shop/models/category.dart';
 
 import '../../../../constants.dart';
 
-// For preview
-class CategoryModel {
-  final String name;
-  final String? svgSrc, route;
-
-  CategoryModel({
-    required this.name,
-    this.svgSrc,
-    this.route,
-  });
-}
-
-List<CategoryModel> demoCategories = [
-  CategoryModel(name: "All Categories"),
-  CategoryModel(
-      name: "On Sale",
-      svgSrc: "assets/icons/Sale.svg",
-      route: onSaleScreenRoute),
-  CategoryModel(name: "Man's", svgSrc: "assets/icons/Man.svg"),
-  CategoryModel(name: "Woman’s", svgSrc: "assets/icons/Woman.svg"),
-  CategoryModel(
-      name: "Kids", svgSrc: "assets/icons/Child.svg", route: kidsScreenRoute),
-];
-// End For Preview
-
-class Categories extends StatelessWidget {
+class Categories extends StatefulWidget {
   const Categories({
     super.key,
   });
 
   @override
+  _CategoriesState createState() => _CategoriesState();
+}
+
+class _CategoriesState extends State<Categories> {
+  late Future<List<Category>> futureCategories;
+  final CategoryService categoryService = CategoryService();
+
+  @override
+  void initState() {
+    super.initState();
+    futureCategories = categoryService.fetchCategories(page: 1, limit: 50);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          ...List.generate(
-            demoCategories.length,
-            (index) => Padding(
-              padding: EdgeInsets.only(
-                  left: index == 0 ? defaultPadding : defaultPadding / 2,
-                  right:
-                      index == demoCategories.length - 1 ? defaultPadding : 0),
-              child: CategoryBtn(
-                category: demoCategories[index].name,
-                svgSrc: demoCategories[index].svgSrc,
-                isActive: index == 0,
-                press: () {
-                  if (demoCategories[index].route != null) {
-                    Navigator.pushNamed(context, demoCategories[index].route!);
-                  }
-                },
-              ),
+    return FutureBuilder<List<Category>>(
+      future: futureCategories,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No categories found'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No categories found'));
+        } else {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: defaultPadding, right: defaultPadding / 2),
+                  child: CategoryBtn(
+                    category: "All Categories",
+                    svgSrc: null, // Update this if you have svgSrc for "All Categories"
+                    isActive: true, // Set this to true if you want "All Categories" to be active by default
+                    press: () {
+                      // Handle navigation or other actions here
+                    },
+                  ),
+                ),
+                ...List.generate(
+                  snapshot.data!.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(
+                        left: defaultPadding / 2,
+                        right: index == snapshot.data!.length - 1
+                            ? defaultPadding
+                            : 0),
+                    child: CategoryBtn(
+                      category: snapshot.data![index].categoryName,
+                      svgSrc: null, // Update this if you have svgSrc in your API response
+                      isActive: false,
+                      press: () {
+                        // Handle navigation or other actions here
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }
