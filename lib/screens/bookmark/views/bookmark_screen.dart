@@ -17,9 +17,15 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   final ProductService productService = ProductService();
 
   @override
-  void initState() {
-    super.initState();
-    futureProducts = productService.fetchProducts(1, 10);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (args != null && args.containsKey('categoryId')) {
+      final int categoryId = args['categoryId'];
+      futureProducts = productService.fetchProductsByCategoryId(categoryId);
+    } else {
+      futureProducts = productService.fetchProducts(1, 10); // Lấy tất cả sản phẩm
+    }
   }
 
   @override
@@ -52,7 +58,13 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                         final product = snapshot.data![index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, productDetailsScreenRoute);
+                            Navigator.pushNamed(
+                              context,
+                              productDetailsScreenRoute,
+                              arguments: {
+                                'productId': product.productId,
+                              },
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -94,7 +106,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                                 ),
                                 const SizedBox(height: defaultPadding / 2),
                                 Text(
-                                  product.category!.categoryName.toUpperCase(),
+                                  product.manufacturer.toUpperCase(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!

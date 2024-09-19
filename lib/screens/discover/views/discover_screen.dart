@@ -3,7 +3,7 @@ import 'package:shop/constants.dart';
 import 'package:shop/models/category.dart';
 import 'package:shop/screens/search/views/components/search_form.dart';
 import 'package:shop/services/CategoryService.dart';
-
+import 'package:shop/route/route_constants.dart'; // Import route constants
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -15,11 +15,30 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   late Future<List<Category>> futureCategories;
   final CategoryService categoryService = CategoryService();
+  final Map<int, List<Category>> _subCategories = {};
+  final Map<int, bool> _expandedCategories = {};
 
   @override
   void initState() {
     super.initState();
-    futureCategories = categoryService.fetchCategories(page: 1, limit: 50);
+    futureCategories = categoryService.fetchCategoryParent();
+  }
+
+  Future<void> _loadSubCategories(int parentId) async {
+    if (!_subCategories.containsKey(parentId)) {
+      List<Category> subCategories = await categoryService.fetchCategoriesByParentId(parentId);
+      setState(() {
+        _subCategories[parentId] = subCategories;
+      });
+    }
+  }
+
+  void _navigateToBookmarkScreen(int categoryId) {
+    Navigator.pushNamed(
+      context,
+      bookmarkScreenRoute,
+      arguments: {'categoryId': categoryId},
+    );
   }
 
   @override
@@ -37,7 +56,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: Text(
-                "Categories",
+                "Parent Categories",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
@@ -56,11 +75,35 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final category = snapshot.data![index];
-                        return ListTile(
-                          title: Text(category.categoryName),
-                          subtitle: category.description != null
-                              ? Text(category.description!)
-                              : null,
+                        final isExpanded = _expandedCategories[category.categoryId] ?? false;
+                        return ExpansionTile(
+                          title: Text(
+                            category.categoryName,
+                            style: TextStyle(
+                              color: isExpanded ? Colors.blue : Colors.black,
+                            ),
+                          ),
+                          backgroundColor: isExpanded ? Colors.blue.shade50 : Colors.transparent,
+                          children: [
+                            if (_subCategories.containsKey(category.categoryId))
+                              ..._subCategories[category.categoryId]!.map((subCategory) {
+                                return ListTile(
+                                  title: Text(subCategory.categoryName),
+                                  onTap: () => _navigateToBookmarkScreen(subCategory.categoryId),
+                                );
+                              }).toList()
+                            else
+                              const Center(child: CircularProgressIndicator()),
+                          ],
+                          onExpansionChanged: (expanded) {
+                            if (expanded) {
+                              _loadSubCategories(category.categoryId);
+                            }
+                            setState(() {
+                              _expandedCategories[category.categoryId] = expanded;
+                            });
+                          },
+                          initiallyExpanded: isExpanded,
                         );
                       },
                     );
