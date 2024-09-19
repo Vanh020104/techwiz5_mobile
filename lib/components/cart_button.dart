@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/models/product.dart';
 
 import '../constants.dart';
 
@@ -9,11 +10,13 @@ class CartButton extends StatelessWidget {
     this.title = "Buy Now",
     this.subTitle = "Unit price",
     required this.press,
+    required this.product,
   });
 
   final double price;
   final String title, subTitle;
   final VoidCallback press;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {

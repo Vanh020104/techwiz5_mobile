@@ -12,16 +12,18 @@ class LoginService {
       body: jsonEncode({'username': username, 'password': password}),
     );
 
-   if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['accessToken'];
-      if (token != null) {
+      final userId = responseBody['id'];
+      if (token != null && userId != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('accessToken', token);
+        await prefs.setInt('userId', userId); // Lưu userId dưới dạng số nguyên
       }
       return responseBody;
     } else {
-      throw Exception('');
+      throw Exception('Failed to login');
     }
   }
 
@@ -33,6 +35,6 @@ class LoginService {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('accessToken');
+    await prefs.remove('userId'); // Xóa userId khi đăng xuất
   }
-
 }
