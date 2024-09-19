@@ -146,7 +146,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   );
     case homeScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
+        builder: (context) =>  HomeScreen(),
       );
     // case brandScreenRoute:
     //   return MaterialPageRoute(
@@ -190,7 +190,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case profileScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const ProfileScreen(),
+        builder: (context) =>  ProfileScreen(),
       );
     // case getHelpScreenRoute:
     //   return MaterialPageRoute(

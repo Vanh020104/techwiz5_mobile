@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/components/Banner/S/banner_s_style_1.dart';
 import 'package:shop/components/Banner/S/banner_s_style_5.dart';
 import 'package:shop/constants.dart';
+import 'package:shop/entry_point.dart';
 import 'package:shop/route/screen_export.dart';
 
 import 'components/best_sellers.dart';
@@ -30,8 +31,10 @@ class HomeScreen extends StatelessWidget {
           slivers: [
             const SliverToBoxAdapter(child: OffersCarouselAndCategories()),
             const SliverToBoxAdapter(child: PopularProducts()),
+            // const SliverToBoxAdapter(child: FlashSale()),
             const SliverPadding(
               padding: EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
+              // sliver: SliverToBoxAdapter(child: EntryPoint()),
               sliver: SliverToBoxAdapter(child: FlashSale()),
             ),
             SliverToBoxAdapter(
@@ -43,7 +46,6 @@ class HomeScreen extends StatelessWidget {
                     title: "New \narrival",
                     subtitle: "SPECIAL OFFER",
                     discountParcent: 50,
-                    
                     press: () {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },

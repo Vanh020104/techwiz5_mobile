@@ -23,69 +23,57 @@ class _LogInFormState extends State<LogInForm> {
   String _loginResult = '';
 
   void _login() async {
-  if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    content: Text(
-      'Please enter complete information!',
-      style: TextStyle(
-        color: const Color.fromARGB(255, 255, 85, 73),
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        ), // Text color
-    ),
-    backgroundColor: const Color.fromARGB(255, 246, 245, 245), // Background color
-  ),
-);
-    return;
+    if (widget.formKey.currentState!.validate()) {
+      final loginService = LoginService();
+      final loginModel = LoginModel(
+        username: _usernameController.text,
+        password: _passwordController.text,
+      );
+
+      try {
+        final result = await loginService.login(
+          loginModel.username,
+          loginModel.password,
+        );
+        setState(() {
+          _loginResult = 'Login success!';
+          Navigator.pushNamed(context, entryPointScreenRoute);
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              _loginResult,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: primaryColor,
+          ),
+        );
+      } catch (e) {
+        setState(() {
+          _loginResult = 'Usernam or password is incorrect!';
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              _loginResult,
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: const Color.fromARGB(255, 246, 245, 245),
+          ),
+        );
+      }
+    }
   }
-
-  final loginService = LoginService();
-  final loginModel = LoginModel(
-    username: _usernameController.text,
-    password: _passwordController.text,
-  );
-
-  try {
-    final result = await loginService.login(
-      loginModel.username,
-      loginModel.password,
-    );
-    setState(() {
-      _loginResult = 'Login success!';
-      // _loginResult = 'Đăng nhập thành công: ${result.toString()}';
-      Navigator.pushNamed(context, homeScreenRoute);
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(_loginResult,
-        style: TextStyle(
-        color: Colors.white,
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: primaryColor,
-      ),
-    );
-  } catch (e) {
-    setState(() {
-      _loginResult = 'Login failed!';
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(_loginResult,
-        style: TextStyle(
-        color: Colors.red,
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: const Color.fromARGB(255, 246, 245, 245),
-      ),
-    );
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +84,18 @@ class _LogInFormState extends State<LogInForm> {
           TextFormField(
             controller: _usernameController,
             decoration: InputDecoration(labelText: 'User Name'),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a username';
+              }
+              if (value.length < 6) {
+                return 'Username must be at least 6 characters long';
+              }
+              if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+                return 'Username can only contain letters and numbers';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: EdgeInsets.only(top: defaultPadding),
@@ -104,41 +104,37 @@ class _LogInFormState extends State<LogInForm> {
             controller: _passwordController,
             decoration: InputDecoration(labelText: 'Password'),
             obscureText: true,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a password';
+              }
+              if (value.length < 8) {
+                return 'Password must be at least 8 characters long';
+              }
+              return null;
+            },
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.only(top: defaultPadding),
           ),
           ElevatedButton(
             onPressed: _login,
             child: Text('Login'),
           ),
-          // Padding(padding: EdgeInsets.only(top: 5)),
-          
-          // Text(_loginResult,
-          
-          //   style: TextStyle(
-          //     color: Colors.red,
-          //     fontSize: 14,
-              
-          //   ),
-          // ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account?"),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, signUpScreenRoute);
-                  },
-                  child: const Text("Sign up"),
-                )
-              ],
-            ),
-          
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Don't have an account?"),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, signUpScreenRoute);
+                },
+                child: const Text("Sign up"),
+              )
+            ],
+          ),
         ],
-        
       ),
-    
     );
   }
 }
