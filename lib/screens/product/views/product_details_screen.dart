@@ -42,11 +42,12 @@ class ProductDetailsScreen extends StatelessWidget {
             return isProductAvailable
                 ? CartButton(
                     price: product.price,
+                    product: product,
                     press: () {
                       customModalBottomSheet(
                         context,
                         height: MediaQuery.of(context).size.height * 0.92,
-                        child: const ProductBuyNowScreen(),
+                        child: ProductBuyNowScreen(product: product),
                       );
                     },
                   )
