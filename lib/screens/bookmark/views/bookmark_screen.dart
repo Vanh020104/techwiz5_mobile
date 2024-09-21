@@ -6,7 +6,9 @@ import 'package:shop/route/route_constants.dart';
 import '../../../constants.dart';
 
 class BookmarkScreen extends StatefulWidget {
-  const BookmarkScreen({super.key});
+  final int? categoryId;
+
+  const BookmarkScreen({Key? key, this.categoryId}) : super(key: key);
 
   @override
   _BookmarkScreenState createState() => _BookmarkScreenState();
@@ -17,14 +19,13 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   final ProductService productService = ProductService();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    if (args != null && args.containsKey('categoryId')) {
-      final int categoryId = args['categoryId'];
-      futureProducts = productService.fetchProductsByCategoryId(categoryId);
+  void initState() {
+    super.initState();
+    if (widget.categoryId != null) {
+      print('Selected categoryId: ${widget.categoryId}'); // Kiểm tra xem categoryId có được truyền đúng không
+      futureProducts = productService.fetchProductsByCategoryId(widget.categoryId!);
     } else {
-      futureProducts = productService.fetchProducts(1, 10); // Lấy tất cả sản phẩm
+      futureProducts = productService.fetchProducts(1, 10); // Lấy tất cả sản phẩm nếu không có categoryId
     }
   }
 

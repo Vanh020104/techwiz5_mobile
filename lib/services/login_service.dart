@@ -15,11 +15,16 @@ class LoginService {
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['accessToken'];
+      final refreshToken = responseBody['refreshToken']; // Lưu refreshToken nếu cần
       final userId = responseBody['id'];
-      if (token != null && userId != null) {
+      final roles = responseBody['roles']; // Là danh sách chuỗi
+      
+      if (token != null && userId != null && roles != null) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('accessToken', token);
-        await prefs.setInt('userId', userId); // Lưu userId dưới dạng số nguyên
+        await prefs.setString('accessToken', token); // Lưu accessToken
+        await prefs.setString('refreshToken', refreshToken); // Lưu refreshToken
+        await prefs.setInt('userId', userId); // Lưu userId
+        await prefs.setStringList('roles', List<String>.from(roles)); // Lưu roles là danh sách chuỗi
       }
       return responseBody;
     } else {
@@ -35,6 +40,20 @@ class LoginService {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('accessToken');
-    await prefs.remove('userId'); // Xóa userId khi đăng xuất
+    await prefs.remove('refreshToken');
+    await prefs.remove('userId');
+    await prefs.remove('roles'); // Xóa roles khi đăng xuất
+  }
+
+  // Hàm lấy danh sách roles đã lưu
+  Future<List<String>?> getRoles() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('roles'); // Lấy danh sách roles
+  }
+
+  // Hàm lấy userId đã lưu
+  Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('userId');
   }
 }
