@@ -12,7 +12,7 @@ import 'package:shop/screens/product/views/components/product_info.dart';
 import 'package:shop/screens/product/views/components/product_list_tile.dart';
 import 'package:shop/screens/product/views/product_buy_now_screen.dart';
 import 'package:shop/screens/product/views/product_returns_screen.dart';
-import 'package:shop/services/ProductService.dart';
+import 'package:shop/services/product_service.dart';
 import 'package:shop/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -11,7 +11,7 @@ import 'package:shop/screens/product/views/components/product_quantity.dart';
 import 'package:shop/screens/product/views/components/unit_price.dart';
 import 'package:shop/screens/product/views/location_permission_store_availability_screen.dart';
 import 'package:shop/screens/product/views/size_guide_screen.dart';
-import 'package:shop/services/CartService.dart';
+import 'package:shop/services/cart_service.dart';
 
 class ProductBuyNowScreen extends StatefulWidget {
   final Product product;

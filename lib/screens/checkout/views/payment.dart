@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/route/screen_export.dart'; // Import navigation routes
 import 'package:shop/route/route_constants.dart';
 import 'package:shop/screens/address/views/addresses_screen.dart'; // Address screen
-import 'package:shop/services/CartService.dart'; // Cart service to get cart items
-import 'package:shop/services/OrderService.dart'; // Order service to place order
+import 'package:shop/services/cart_service.dart'; // Cart service to get cart items
+import 'package:shop/services/order_service.dart'; // Order service to place order
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});

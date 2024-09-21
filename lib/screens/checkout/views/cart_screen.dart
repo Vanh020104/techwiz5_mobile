@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/route/route_constants.dart';
 import 'package:shop/screens/checkout/views/payment.dart';
-import 'package:shop/services/CartService.dart';
+import 'package:shop/services/cart_service.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

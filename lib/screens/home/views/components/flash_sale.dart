@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/route/route_constants.dart';
-import 'package:shop/services/ProductService.dart';
+import 'package:shop/services/product_service.dart';
 
 
 import '/components/Banner/M/banner_m_with_counter.dart';

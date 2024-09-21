@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/entry_point.dart';
-import 'package:shop/screens/designer/views/RegisterDesignerScreen.dart';
+
 import 'package:shop/screens/checkout/views/payment.dart';
+import 'package:shop/screens/designer/views/register_designer_screen.dart';
 import 'package:shop/screens/order/views/order_infor.dart';
 
 

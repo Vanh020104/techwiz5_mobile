@@ -6,7 +6,7 @@ import 'package:shop/components/network_image_with_loader.dart';
 import 'package:shop/constants.dart';
 import 'package:shop/entry_point.dart';
 import 'package:shop/route/screen_export.dart';
-import 'package:shop/services/UserService.dart';
+import 'package:shop/services/user_service.dart';
 import 'package:shop/services/login_service.dart';
 
 import 'components/profile_card.dart';

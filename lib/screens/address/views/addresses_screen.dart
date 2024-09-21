@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/screens/checkout/views/payment.dart';
-import 'package:shop/services/AddressService.dart';
+import 'package:shop/services/address_service.dart';
 
 class AddressesScreen extends StatefulWidget {
   const AddressesScreen({super.key});

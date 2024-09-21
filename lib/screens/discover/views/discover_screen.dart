@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/constants.dart';
 import 'package:shop/models/category.dart';
 import 'package:shop/screens/search/views/components/search_form.dart';
-import 'package:shop/services/CategoryService.dart';
+import 'package:shop/services/category_service.dart';
 import 'package:shop/route/route_constants.dart'; // Import route constants
 
 class DiscoverScreen extends StatefulWidget {

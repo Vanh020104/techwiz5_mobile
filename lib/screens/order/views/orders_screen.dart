@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/components/buy_full_ui_kit.dart';
-import 'package:shop/models/OrderStatus.dart';
+import 'package:shop/models/order_status.dart';
 import 'package:shop/route/route_constants.dart';
 
 class OrdersScreen extends StatefulWidget {
