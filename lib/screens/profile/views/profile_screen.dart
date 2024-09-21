@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop/components/list_tile/divider_list_tile.dart';
 import 'package:shop/components/network_image_with_loader.dart';
 import 'package:shop/constants.dart';
 import 'package:shop/entry_point.dart';
 import 'package:shop/route/screen_export.dart';
+import 'package:shop/screens/designer/views/designer_schedule_screen.dart';
 import 'package:shop/services/user_service.dart';
 import 'package:shop/services/login_service.dart';
 
@@ -25,14 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _name = '';
   String _email = '';
   String _imageSrc = '';
-  bool isUser = false; // Kiểm tra vai trò người dùng
-  bool isDesigner = false; // Kiểm tra vai trò designer
+  bool isUser = false; 
+  bool isDesigner = false; 
 
   @override
   void initState() {
     super.initState();
     _fetchUserData();
-    checkUserRole(); // Kiểm tra vai trò khi khởi tạo
+    checkUserRole(); 
   }
 
   Future<void> checkUserRole() async {
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Kiểm tra vai trò ROLE_USER
         isUser = roles.contains('ROLE_USER');
         // Kiểm tra vai trò ROLE_DESIGNER
-        isDesigner = roles.contains('ROLE_ADMIN');
+        isDesigner = roles.contains('ROLE_DESIGNER');
       });
       if (isDesigner) {
         print("User is a designer!");
@@ -129,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: defaultPadding),
 
-          // Hiển thị phần cho ROLE_USER
+          
           if (isUser) ...[
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -155,24 +155,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
 
-          // Hiển thị phần cho ROLE_DESIGNER
+          
           if (isDesigner) ...[
             const SizedBox(height: defaultPadding),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding, vertical: defaultPadding / 2),
-              child: Text(
-                "Help & Support for Designer",
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            ),
-            ProfileMenuListTile(
-              text: "Get Help",
-              svgSrc: "assets/icons/Help.svg",
-              press: () {
-                Navigator.pushNamed(context, getHelpScreenRoute);
-              },
-            ),
+    padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
+    child: Text(
+      "Designer Options",
+      style: Theme.of(context).textTheme.titleSmall,
+    ),
+  ),
+  ProfileMenuListTile(
+    text: "Manage Schedule",
+    svgSrc: "assets/icons/Cash.svg",
+    press: () {
+      Navigator.pushNamed(context, designerScheduleScreenRoute);
+    },
+  ),
             ProfileMenuListTile(
               text: "FAQ",
               svgSrc: "assets/icons/FAQ.svg",
