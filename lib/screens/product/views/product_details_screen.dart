@@ -19,7 +19,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ProductDetailsScreen extends StatelessWidget {
   final int productId;
 
-  const ProductDetailsScreen({Key? key, required this.productId}) : super(key: key);
+  const ProductDetailsScreen({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class ProductDetailsScreen extends StatelessWidget {
         future: productService.fetchProductById(productId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           } else if (snapshot.hasError || !snapshot.hasData) {
             return NotifyMeCard(
               isNotify: false,
@@ -62,11 +62,11 @@ class ProductDetailsScreen extends StatelessWidget {
         future: productService.fetchProductById(productId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('Product not found'));
+            return const Center(child: Text('Product not found'));
           } else {
             final product = snapshot.data!;
             return SafeArea(
@@ -84,18 +84,18 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   ProductImages(
-                    images: product.images.map((image) => 'http://10.0.2.2:8082/api/v1/product-images/imagesPost/' + image.imageUrl).toList(),
+                    images: product.images.map((image) => 'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${image.imageUrl}').toList(),
                   ),
                   ProductInfo(
                     brand: product.manufacturer,
                     title: product.name,
-                    isAvailable: product.stockQuantity > 0, // Sử dụng stockQuantity để xác định tình trạng sẵn có
+                    isAvailable: product.stockQuantity > 0, 
                     description: product.description,
-                    rating: 4.4, // Bạn có thể thay đổi giá trị này theo dữ liệu thực tế
+                    rating: 4.4, 
                     numOfReviews: 126,
                     category: product.category!.categoryName,
                     size: product.size,
-                    weight: product.weight, // Bạn có thể thay đổi giá trị này theo dữ liệu thực tế
+                    weight: product.weight, 
                   ),
                   
                   const SliverToBoxAdapter(

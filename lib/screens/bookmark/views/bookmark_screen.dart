@@ -85,15 +85,15 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                                           height: 110,
                                           width: 110,
                                           errorBuilder: (context, error, stackTrace) {
-                                            return Icon(Icons.error, size: 110);
+                                            return const Icon(Icons.error, size: 110);
                                           },
                                         )
                                       : Image.network(
-                                          'http://10.0.2.2:8082/api/v1/product-images/imagesPost/' + product.images[0].imageUrl,
+                                          'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${product.images[0].imageUrl}',
                                           height: 110,
                                           width: 110,
                                           errorBuilder: (context, error, stackTrace) {
-                                            return Icon(Icons.error, size: 110);
+                                            return const Icon(Icons.error, size: 110);
                                           },
                                         ))
                                     : Image.asset(
@@ -101,7 +101,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                                         height: 110,
                                         width: 110,
                                         errorBuilder: (context, error, stackTrace) {
-                                          return Icon(Icons.error, size: 110);
+                                          return const Icon(Icons.error, size: 110);
                                         },
                                       ),
                                 ),

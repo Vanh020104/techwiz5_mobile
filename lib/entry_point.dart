@@ -167,7 +167,7 @@ class EntryPoint extends StatefulWidget {
 }
 
 class _EntryPointState extends State<EntryPoint> {
-  List<Widget> _pages = [
+  final List<Widget> _pages = [
     const HomeScreen(),
     const DiscoverScreen(),
     const BookmarkScreen(),
@@ -198,12 +198,15 @@ class _EntryPointState extends State<EntryPoint> {
         leading: const SizedBox(),
         leadingWidth: 0,
         centerTitle: false,
-        title: SvgPicture.asset(
-          "assets/logo/Shoplon.svg",
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).iconTheme.color!, BlendMode.srcIn),
-          height: 20,
-          width: 100,
+        title: const Text(
+          "Interior",   
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'Music',
+            
+          ),
         ),
         actions: [
           IconButton(

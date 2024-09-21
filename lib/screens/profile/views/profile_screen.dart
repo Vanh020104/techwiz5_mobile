@@ -80,6 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             name: _name,
             email: _email,
             imageSrc: _imageSrc.isNotEmpty ? _imageSrc : 'assets/images/avatar.jpg',
+
             press: () {
               Navigator.pushNamed(context, userInfoScreenRoute);
             },
@@ -185,14 +186,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () async {
               await _loginService.logout();
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text(
-                    'Logout successful!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
+
+              const SnackBar(
+                content: Text(
+                  'Logout successful!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                   backgroundColor: primaryColor,
                 ),

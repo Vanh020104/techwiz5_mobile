@@ -37,14 +37,14 @@ class _LogInFormState extends State<LogInForm> {
         );
         setState(() {
           _loginResult = 'Login success!';
-          Navigator.pushNamed(context, entryPointScreenRoute);
+           Navigator.pushReplacementNamed(context, entryPointScreenRoute);
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
               _loginResult,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class _LogInFormState extends State<LogInForm> {
           SnackBar(
             content: Text(
               _loginResult,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.red,
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class _LogInFormState extends State<LogInForm> {
         children: [
           TextFormField(
             controller: _usernameController,
-            decoration: InputDecoration(labelText: 'User Name'),
+            decoration: const InputDecoration(labelText: 'User Name'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter a username';
@@ -97,12 +97,12 @@ class _LogInFormState extends State<LogInForm> {
               return null;
             },
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: defaultPadding),
           ),
           TextFormField(
             controller: _passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -114,12 +114,12 @@ class _LogInFormState extends State<LogInForm> {
               return null;
             },
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: defaultPadding),
           ),
           ElevatedButton(
             onPressed: _login,
-            child: Text('Login'),
+            child: const Text('Login'),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/route/route_constants.dart';
 import 'package:shop/route/router.dart' as router;
-import 'package:shop/screens/auth/views/login_screen.dart';
-import 'package:shop/screens/home/views/home_screen.dart';
 import 'package:shop/theme/app_theme.dart';
 
 void main() {

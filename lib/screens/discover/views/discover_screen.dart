@@ -86,6 +86,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             ),
                           ),
                           backgroundColor: isExpanded ? Colors.blue.shade50 : Colors.transparent,
+                          onExpansionChanged: (expanded) {
+                            if (expanded) {
+                              _loadSubCategories(category.categoryId);
+                            }
+                            setState(() {
+                              _expandedCategories[category.categoryId] = expanded;
+                            });
+                          },
+                          initiallyExpanded: isExpanded,
                           children: [
                             if (_subCategories.containsKey(category.categoryId))
                               ..._subCategories[category.categoryId]!.map((subCategory) {
@@ -97,15 +106,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             else
                               const Center(child: CircularProgressIndicator()),
                           ],
-                          onExpansionChanged: (expanded) {
-                            if (expanded) {
-                              _loadSubCategories(category.categoryId);
-                            }
-                            setState(() {
-                              _expandedCategories[category.categoryId] = expanded;
-                            });
-                          },
-                          initiallyExpanded: isExpanded,
                         );
                       },
                     );

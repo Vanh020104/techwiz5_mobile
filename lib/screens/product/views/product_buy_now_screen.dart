@@ -16,14 +16,14 @@ import 'package:shop/services/CartService.dart';
 class ProductBuyNowScreen extends StatefulWidget {
   final Product product;
 
-  ProductBuyNowScreen({required this.product});
+  const ProductBuyNowScreen({super.key, required this.product});
 
   @override
   _ProductBuyNowScreenState createState() => _ProductBuyNowScreenState();
 }
 
 class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
-  int quantity = 2;
+  int quantity = 1;
   late Future<CartService> cartServiceFuture;
   late Future<int?> userIdFuture;
 
@@ -68,7 +68,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
         future: cartServiceFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
@@ -77,13 +77,13 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
               future: userIdFuture,
               builder: (context, userIdSnapshot) {
                 if (userIdSnapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (userIdSnapshot.hasError) {
                   return Center(child: Text('Error: ${userIdSnapshot.error}'));
                 } else {
                   final userId = userIdSnapshot.data;
                   if (userId == null) {
-                    return Center(child: Text('User ID is null'));
+                    return const Center(child: Text('User ID is null'));
                   }
                   return CartButton(
                     price: totalPrice,
@@ -99,14 +99,30 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
 
                       try {
                         await cartService.addToCart(cartItem);
-                        customModalBottomSheet(
-                          context,
-                          isDismissible: false,
-                          child: const AddedToCartMessageScreen(),
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Item added to cart successfully!', style: TextStyle(
+                              color: Colors.white,
+                               fontWeight: FontWeight.bold,),
+                              ),
+                            backgroundColor: primaryColor,
+                          ),
                         );
-                      } catch (e) {
-                        // Xử lý lỗi nếu cần
-                        print('Failed to add to cart: $e');
+                        } catch (e) {
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Add to cart failed!',
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            backgroundColor: const Color.fromARGB(255, 246, 245, 245),
+                          ),
+                        );
                       }
                     },
                   );
@@ -124,20 +140,26 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
             snap: true,
             expandedHeight: 350.0, // Tăng chiều cao để có thêm khoảng cách
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(widget.product.name), // Sử dụng tên từ product
+              // title: Text(widget.product.name), // Sử dụng tên từ product
               background: Padding(
                 padding: const EdgeInsets.all(8.0), // Thêm padding
-                child: Image.network(
-                  'http://10.0.2.2:8082/api/v1/product-images/imagesPost/' + widget.product.images[0].imageUrl,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error, size: 110);
-                  },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                  child: Image.network(
+                    'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${widget.product.images[0].imageUrl}',
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.error, size: 110);
+                    },
+                  ),
                 ),
               ),
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
