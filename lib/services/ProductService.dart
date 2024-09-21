@@ -27,7 +27,7 @@ class ProductService {
     }
   }
   Future<List<Product>> fetchProductsByCategoryId(int categoryId) async {
-    final response = await http.get(Uri.parse('${apiUrl}category/$categoryId'));
+    final response = await http.get(Uri.parse('$apiUrl/category/$categoryId'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -36,6 +36,17 @@ class ProductService {
       return products;
     } else {
       throw Exception('Failed to load products by category id');
+    }
+  }
+  Future<List<Product>> fetchPopularProducts() async {
+    final response = await http.get(Uri.parse('$apiUrl/search-by-specification?page=1&size=7&sort=soldQuantity:desc'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> productsJson = data['data']['content'];
+      return productsJson.map((json) => Product.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load popular products');
     }
   }
 

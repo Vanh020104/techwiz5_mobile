@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/components/product/product_card.dart';
-import 'package:shop/models/product_model.dart';
+import 'package:shop/models/product.dart';
+import 'package:shop/services/ProductService.dart';
+
 import 'package:shop/route/screen_export.dart';
 
 import '../../../../constants.dart';
@@ -12,6 +14,8 @@ class PopularProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductService productService = ProductService();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,36 +27,51 @@ class PopularProducts extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        // While loading use 👇
-        // const ProductsSkelton(),
-        SizedBox(
-          height: 220,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            // Find demoPopularProducts on models/ProductModel.dart
-            itemCount: demoPopularProducts.length,
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(
-                left: defaultPadding,
-                right: index == demoPopularProducts.length - 1
-                    ? defaultPadding
-                    : 0,
-              ),
-              child: ProductCard(
-                image: demoPopularProducts[index].image,
-                brandName: demoPopularProducts[index].brandName,
-                title: demoPopularProducts[index].title,
-                price: demoPopularProducts[index].price,
-                priceAfetDiscount: demoPopularProducts[index].priceAfetDiscount,
-                dicountpercent: demoPopularProducts[index].dicountpercent,
-                press: () {
-                  Navigator.pushNamed(context, productDetailsScreenRoute,
-                      arguments: index.isEven);
-                },
-              ),
-            ),
-          ),
-        )
+        FutureBuilder<List<Product>>(
+          future: productService.fetchPopularProducts(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No popular products found'));
+            } else {
+              return SizedBox(
+                height: 220,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final product = snapshot.data![index];
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        left: defaultPadding,
+                        right: index == snapshot.data!.length - 1
+                            ? defaultPadding
+                            : 0,
+                      ),
+                      child: ProductCard(
+                        image: product.images.isNotEmpty
+                            ? 'http://10.0.2.2:8082/api/v1/product-images/imagesPost/' + product.images[0].imageUrl
+                            : 'assets/images/0055.png_860.png',
+                        manufacturer: product.manufacturer,
+                        price: product.price,
+                        press: () {
+                          Navigator.pushNamed(
+                            context,
+                            productDetailsScreenRoute,
+                            arguments: {'productId': product.productId},
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+          },
+        ),
       ],
     );
   }

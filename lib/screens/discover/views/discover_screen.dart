@@ -34,12 +34,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   }
 
   void _navigateToBookmarkScreen(int categoryId) {
-    Navigator.pushNamed(
-      context,
-      bookmarkScreenRoute,
-      arguments: {'categoryId': categoryId},
-    );
-  }
+  print('Navigating to BookmarkScreen with categoryId: $categoryId'); // In ra để kiểm tra
+  Navigator.pushNamed(
+    context,
+    bookmarkScreenRoute,
+    arguments: {'categoryId': categoryId},
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {

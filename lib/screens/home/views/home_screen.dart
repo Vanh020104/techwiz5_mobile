@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             const SliverPadding(
               padding: EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
               // sliver: SliverToBoxAdapter(child: EntryPoint()),
-              sliver: SliverToBoxAdapter(child: FlashSale()),
+              
             ),
             SliverToBoxAdapter(
               child: Column(
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SliverToBoxAdapter(child: BestSellers()),
-            const SliverToBoxAdapter(child: MostPopular()),
+            
             SliverToBoxAdapter(
               child: Column(
                 children: [
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SliverToBoxAdapter(child: BestSellers()),
+            const SliverToBoxAdapter(child: FlashSale()),
           ],
         ),
       ),

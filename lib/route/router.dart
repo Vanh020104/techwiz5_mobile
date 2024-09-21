@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/entry_point.dart';
+import 'package:shop/screens/designer/views/RegisterDesignerScreen.dart';
 
 import 'screen_export.dart';
 
@@ -75,6 +76,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case logInScreenRoute:
       return MaterialPageRoute(
         builder: (context) =>  LoginScreen(),
+      );
+      case registerDesignerScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  RegisterDesignerScreen(),
       );
     case signUpScreenRoute:
       return MaterialPageRoute(
@@ -181,9 +186,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //     builder: (context) => const SearchHistoryScreen(),
     //   );
     case bookmarkScreenRoute:
-      return MaterialPageRoute(
-        builder: (context) => const BookmarkScreen(),
-      );
+  return MaterialPageRoute(
+    builder: (context) {
+      final args = settings.arguments as Map<String, dynamic>?;
+      if (args != null && args.containsKey('categoryId')) {
+        final int categoryId = args['categoryId'];
+        return BookmarkScreen(categoryId: categoryId); // Truyền categoryId vào BookmarkScreen
+      } else {
+        return BookmarkScreen(); // Hoặc xử lý trường hợp không có categoryId
+      }
+    },
+  );
     case entryPointScreenRoute:
       return MaterialPageRoute(
         builder: (context) => const EntryPoint(),
