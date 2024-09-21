@@ -155,7 +155,7 @@ class CartScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.pushNamed(context, '/checkout');
+                    Navigator.pushNamed(context, paymentScreenRoute);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue, // Background color
