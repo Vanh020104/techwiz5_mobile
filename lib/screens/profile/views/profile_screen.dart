@@ -24,8 +24,7 @@ class ProfileScreen extends StatelessWidget {
             name: "Sepide",
             email: "theflutterway@gmail.com",
             imageSrc: "https://i.imgur.com/IXnwbLk.png",
-            // proLableText: "Sliver",
-            // isPro: true, if the user is pro
+            
             press: () {
               Navigator.pushNamed(context, userInfoScreenRoute);
             },
@@ -163,7 +162,7 @@ class ProfileScreen extends StatelessWidget {
             onTap: () async {
               await _loginService.logout();
               ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text(
                   'Logout successful!',
                   style: TextStyle(

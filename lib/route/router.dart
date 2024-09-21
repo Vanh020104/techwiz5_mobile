@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/entry_point.dart';
+import 'package:shop/screens/checkout/views/payment.dart';
+import 'package:shop/screens/order/views/order_infor.dart';
 
 import 'screen_export.dart';
 
@@ -74,7 +76,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   );
     case logInScreenRoute:
       return MaterialPageRoute(
-        builder: (context) =>  LoginScreen(),
+        builder: (context) =>  const LoginScreen(),
       );
     case signUpScreenRoute:
       return MaterialPageRoute(
@@ -146,7 +148,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   );
     case homeScreenRoute:
       return MaterialPageRoute(
-        builder: (context) =>  HomeScreen(),
+        builder: (context) =>  const HomeScreen(),
       );
     // case brandScreenRoute:
     //   return MaterialPageRoute(
@@ -238,7 +240,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   );
     case addressesScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const AddressesScreen(),
+        builder: (context) =>  const AddressesScreen(),
       );
     // case addNewAddressesScreenRoute:
     //   return MaterialPageRoute(
@@ -248,6 +250,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const OrdersScreen(),
       );
+
+    case orderInfoScreenRoute:
+    return MaterialPageRoute(
+      builder: (context) =>  OrderInfo(),
+    );
     // case orderProcessingScreenRoute:
     //   return MaterialPageRoute(
     //     builder: (context) => const OrderProcessingScreen(),
@@ -292,6 +299,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   return MaterialPageRoute(
     //     builder: (context) => const PaymentMethodScreen(),
     //   );
+    case paymentScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => const PaymentScreen(),
+      );
+
     // case addNewCardScreenRoute:
     //   return MaterialPageRoute(
     //     builder: (context) => const AddNewCardScreen(),

@@ -43,7 +43,7 @@ class _CategoriesState extends State<Categories> {
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: defaultPadding, right: defaultPadding / 2),
                   child: CategoryBtn(
                     category: "All Categories",

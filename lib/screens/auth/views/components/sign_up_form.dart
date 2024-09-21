@@ -24,7 +24,7 @@ class SignUpForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: usernameController,
-            decoration: InputDecoration(labelText: 'User Name'),
+            decoration: const InputDecoration(labelText: 'User Name'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter a username';
@@ -37,12 +37,12 @@ class SignUpForm extends StatelessWidget {
               return null;
             },
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 20),
           ),
           TextFormField(
             controller: emailController,
-            decoration: InputDecoration(labelText: 'Email'),
+            decoration: const InputDecoration(labelText: 'Email'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter an email';
@@ -52,13 +52,13 @@ class SignUpForm extends StatelessWidget {
               return null;
             },
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 23),
           ),
           
           TextFormField(
             controller: passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -70,7 +70,7 @@ class SignUpForm extends StatelessWidget {
               return null;
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
               if (formKey.currentState!.validate()) {
@@ -82,7 +82,7 @@ class SignUpForm extends StatelessWidget {
                   );
                   // Handle successful registration
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text(
                         'Registration successful!',
                         style: TextStyle(
@@ -95,11 +95,11 @@ class SignUpForm extends StatelessWidget {
                     ),
                   );
                   // Navigator.pushNamed(context, loginScreenRoute);
-                  Navigator.pushNamed(context, logInScreenRoute);
+                  Navigator.pushReplacementNamed(context, logInScreenRoute);
                 } catch (e) {
                   // Handle registration error
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text(
                         'Registration fails!',
                         style: TextStyle(
@@ -108,13 +108,13 @@ class SignUpForm extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      backgroundColor: const Color.fromARGB(255, 246, 245, 245),
+                      backgroundColor: Color.fromARGB(255, 246, 245, 245),
                     ),
                   );
                 }
               }
             },
-            child: Text('Register'),
+            child: const Text('Register'),
           ),
         ],
       ),
