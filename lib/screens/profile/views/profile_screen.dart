@@ -195,9 +195,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
-                  backgroundColor: primaryColor,
                 ),
-              );
+                backgroundColor: primaryColor,
+              ));
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
