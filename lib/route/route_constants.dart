@@ -58,6 +58,9 @@ const String paymentMethodScreenRoute = "payment_method";
 const String addNewCardScreenRoute = "add_new_card";
 const String thanksForOrderScreenRoute = "thanks_order";
 const String registerDesignerScreenRoute = "register_designer";
+const String designerScheduleScreenRoute = "designer_schedule";
+const String createScheduleScreenRoute = "create_schedule";
+const String appointmentDetailScreenRoute = "appointment_detail";
 const String paymentScreenRoute = "payment";
 const String orderInfoScreenRoute = "order_info";
 
