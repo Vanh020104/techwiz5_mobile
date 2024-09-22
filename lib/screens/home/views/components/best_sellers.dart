@@ -53,7 +53,7 @@ class BestSellers extends StatelessWidget {
                       ),
                       child: ProductCard(
                         image: product.images.isNotEmpty
-                            ? 'http://10.0.2.2:8082/api/v1/product-images/imagesPost/' + product.images[0].imageUrl
+                            ? 'https://techwiz-product-service-fpd5bedth9ckdgay.eastasia-01.azurewebsites.net/api/v1/product-images/imagesPost/' + product.images[0].imageUrl
                             : 'assets/images/0055.png_860.png',
                         manufacturer: product.manufacturer,
                         price: product.price,

@@ -68,7 +68,7 @@ class CartScreen extends StatelessWidget {
                     final quantity = item['quantity'];
                     final productImages = item['productImages'] as List<dynamic>;
                     final imageUrl = productImages.isNotEmpty
-                        ? 'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${productImages[0]}'
+                        ? 'https://techwiz-product-service-fpd5bedth9ckdgay.eastasia-01.azurewebsites.net/api/v1/product-images/imagesPost/${productImages[0]}'
                         : '';
 
                     return Column(

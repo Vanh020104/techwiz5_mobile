@@ -6,7 +6,7 @@ import 'package:shop/route/route_constants.dart';
 import 'package:shop/screens/home/views/home_screen.dart';
 
 class OrderService {
-  final String apiUrl = 'http://10.0.2.2:8080/api/v1/orders';
+  final String apiUrl = 'https://techwiz5-order-service-dchugggwh5g9hjdx.eastasia-01.azurewebsites.net/api/v1/orders';
 
   Future<void> placeOrder(Map<String, dynamic> orderData, BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();

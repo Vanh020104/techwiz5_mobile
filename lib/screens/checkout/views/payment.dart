@@ -66,7 +66,7 @@ class _PaymentState extends State<PaymentScreen> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8081/api/v1/address_order/user/$userId'),
+      Uri.parse('https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/address_order/user/$userId'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -268,7 +268,7 @@ void _placeOrder(List<Map<String, dynamic>> cartItems) async {
                           final productPrice = item['productPrice'].toStringAsFixed(2);
                           final quantity = item['quantity'];
                           final imageUrl =
-                              'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${item['productImages'][0]}';
+                              'https://techwiz-product-service-fpd5bedth9ckdgay.eastasia-01.azurewebsites.net/api/v1/product-images/imagesPost/${item['productImages'][0]}';
 
                           return Column(
                             children: [

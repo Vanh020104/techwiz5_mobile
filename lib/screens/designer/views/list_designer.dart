@@ -22,7 +22,7 @@ class _DesignerListScreenState extends State<DesignerListScreen> {
   }
 
   Future<void> fetchDesigners() async {
-    const String apiUrl = 'http://10.0.2.2:8080/api/v1/users/role/3';
+    const String apiUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/users/role/3';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
