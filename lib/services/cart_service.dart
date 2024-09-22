@@ -13,7 +13,7 @@ class CartService {
   Future<void> addToCart(CartItem cartItem) async {
     final token = await getToken();
     if (token == null) {
-      throw Exception('Không tìm thấy token');
+      throw Exception('');
     }
 
     final url = Uri.parse('$baseUrl/api/v1/cart');
@@ -27,7 +27,7 @@ class CartService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Thêm sản phẩm vào giỏ hàng thất bại');
+      throw Exception('add to cart failed');
     }
   }
 
@@ -41,7 +41,7 @@ class CartService {
   Future<List<Map<String, dynamic>>> getCartData(int userId) async {
     final token = await getToken();
     if (token == null) {
-      throw Exception('Không tìm thấy token');
+      throw Exception('');
     }
 
     final url = Uri.parse('$baseUrl/api/v1/cart/user/$userId');
@@ -71,7 +71,7 @@ class CartService {
         };
       }).toList();
     } else {
-      throw Exception('Không thể tải dữ liệu giỏ hàng');
+      throw Exception('Failed to load cart data');
     }
   }
 }

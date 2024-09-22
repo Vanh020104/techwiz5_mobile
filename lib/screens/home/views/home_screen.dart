@@ -64,14 +64,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: defaultPadding / 4),
                   // While loading use 👇
                   // const BannerSSkelton(),
-                  BannerSStyle5(
-                    title: "Black \nfriday",
-                    subtitle: "50% Off",
-                    bottomText: "Collection".toUpperCase(),
-                    press: () {
-                      Navigator.pushNamed(context, onSaleScreenRoute);
-                    },
-                  ),
+                  // BannerSStyle5(
+                  //   title: "Black \nfriday",
+                  //   subtitle: "50% Off",
+                  //   bottomText: "Collection".toUpperCase(),
+                  //   press: () {
+                  //     // Navigator.pushNamed(context, onSaleScreenRoute);
+                  //   },
+                  // ),
                   const SizedBox(height: defaultPadding / 4),
                 ],
               ),

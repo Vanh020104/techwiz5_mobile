@@ -195,7 +195,7 @@ class OrderDetailPage extends StatelessWidget {
     // Replace this with the actual details of the order
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Details'),
+        title: Text('Order Details', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.deepPurple,
       ),
       body: Center(

@@ -29,18 +29,18 @@ class OrderService {
       final responseData = jsonDecode(response.body);
       if (responseData['code'] == 200) {
        
-       Navigator.pushNamed(context, homeScreenRoute); 
+     Navigator.pushNamed(context, createScreenRoute);
 
         // Navigator.pushReplacementNamed(context, homeScreenRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Order failed: ${responseData['message']}')),
+          SnackBar(content: Text('Order failed!')),
         );
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Order failed: ${response.body}')),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('Order failed')),
+      // );
     }
   }
 }
