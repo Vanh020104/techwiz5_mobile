@@ -8,6 +8,9 @@ import 'package:shop/screens/designer/views/add_home_des.dart';
 import 'package:shop/screens/designer/views/appointment_screen.dart';
 import 'package:shop/screens/designer/views/list_appointment_user.dart';
 import 'package:shop/screens/designer/views/list_designer.dart';
+import 'package:shop/screens/designer/views/designer_appointment_detail.dart';
+import 'package:shop/screens/designer/views/create_schedule_screen.dart';
+import 'package:shop/screens/designer/views/designer_schedule_screen.dart';
 import 'package:shop/screens/designer/views/register_designer_screen.dart';
 import 'package:shop/screens/order/views/cancel_page.dart';
 import 'package:shop/screens/order/views/complete_page.dart';
@@ -96,6 +99,22 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case registerDesignerScreenRoute:
       return MaterialPageRoute(
         builder: (context) =>  RegisterDesignerScreen(),
+      );
+      case designerScheduleScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  const DesignerScheduleScreen(),
+      );
+      case createScheduleScreenRoute:
+  return MaterialPageRoute(
+    builder: (context) => const CreateScheduleScreen(),
+  );
+      case appointmentDetailScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) {
+          final args = settings.arguments as Map<String, dynamic>;
+          final int appointmentId = args['appointmentId'];
+          return AppointmentDetail(appointmentId: appointmentId);
+        },
       );
     case signUpScreenRoute:
       return MaterialPageRoute(
