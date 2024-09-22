@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/route/screen_export.dart'; // Import navigation routes
 import 'package:shop/route/route_constants.dart';
 import 'package:shop/screens/address/views/addresses_screen.dart'; // Address screen
+import 'package:shop/screens/home/views/thank_you.dart';
 import 'package:shop/services/cart_service.dart'; // Cart service to get cart items
 import 'package:shop/services/order_service.dart'; // Order service to place order
 
@@ -42,19 +43,18 @@ class _PaymentState extends State<PaymentScreen> {
     });
   }
 
-  // Fetch user ID from shared preferences
+
   Future<int?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt('userId');
   }
 
-  // Fetch user token from shared preferences
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('accessToken');
   }
 
-  // Fetch the user's address from API
+
   Future<void> fetchAddress(int userId) async {
     final token = await getToken();
     if (token == null) {
@@ -65,7 +65,6 @@ class _PaymentState extends State<PaymentScreen> {
       return;
     }
 
-    // API call to fetch user addresses
     final response = await http.get(
       Uri.parse('http://10.0.2.2:8081/api/v1/address_order/user/$userId'),
       headers: {
@@ -110,44 +109,63 @@ class _PaymentState extends State<PaymentScreen> {
     }
   }
 
-  // Place order method
-  void _placeOrder(List<Map<String, dynamic>> cartItems) async {
-    if (userId == null) return;
-    final sum = 1;
-    final orderData = {
-      "userId": userId,
-      "addressOrderId": id, 
-      "note": "Order note here", 
-      "paymentMethod": selectedPaymentMethod,
-      "totalPrice": cartItems.fold<double>(
-        0.0,
-        (sum, item) => sum + (item['productPrice'] as double) * (item['quantity'] as int),
-      ),
-      "cartItems": cartItems.map((item) {
-        return {
-          "userId": userId,
-          "productId": item['productId'],
-          "quantity": item['quantity'],
-          "unitPrice": item['productPrice'],
-        };
-      }).toList(),
-    };
-    print(orderData);
+ 
+void _placeOrder(List<Map<String, dynamic>> cartItems) async {
+  if (userId == null) return;
 
-    try {
-      await OrderService().placeOrder(orderData, context); 
-    
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Order placed successfully!')),
-      );
-      Navigator.pushNamed(context, homeScreenRoute); 
-
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Order failed! $e')),
-      );
-    }
+  if (id == null) { 
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color.fromARGB(255, 228, 227, 227),
+        content: Text(
+          'Please enter a delivery address!', 
+          style: TextStyle(color: Colors.red, fontSize: 15),
+          )),
+    );
+    return;
   }
+
+  final orderData = {
+    "userId": userId,
+    "addressOrderId": id, 
+    "note": "Order note here", 
+    "paymentMethod": selectedPaymentMethod,
+    "totalPrice": cartItems.fold<double>(
+      0.0,
+      (sum, item) => sum + (item['productPrice'] as double) * (item['quantity'] as int),
+    ),
+    "cartItems": cartItems.map((item) {
+      return {
+        "userId": userId,
+        "productId": item['productId'],
+        "quantity": item['quantity'],
+        "unitPrice": item['productPrice'],
+      };
+    }).toList(),
+  };
+
+
+
+  try {
+    await OrderService().placeOrder(orderData, context);
+
+    // Show success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Order placed successfully!')),
+    );
+
+       Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TestPage()), 
+    );
+  } catch (e) {
+    // Handle errors by showing a failure message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Failed to place order: $e')),
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -290,16 +308,16 @@ class _PaymentState extends State<PaymentScreen> {
                                   });
                                 },
                               ),
-                              RadioListTile<String>(
-                                title: const Text('Payment with VNPAY'),
-                                value: 'VNPAY',
-                                groupValue: selectedPaymentMethod,
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedPaymentMethod = value!;
-                                  });
-                                },
-                              ),
+                              // RadioListTile<String>(
+                              //   title: const Text('Payment with VNPAY'),
+                              //   value: 'VNPAY',
+                              //   groupValue: selectedPaymentMethod,
+                              //   onChanged: (value) {
+                              //     setState(() {
+                              //       selectedPaymentMethod = value!;
+                              //     });
+                              //   },
+                              // ),
                             ],
                           ),
                         ),
@@ -329,6 +347,7 @@ class _PaymentState extends State<PaymentScreen> {
                         ElevatedButton(
                           onPressed: () {
                             _placeOrder(cartItems); 
+                          
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,

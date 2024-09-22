@@ -38,7 +38,7 @@ class _AddressesScreenState extends State<AddressesScreen> {
   void _submitAddress() async {
     if (_userId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User ID not found')),
+        const SnackBar(content: Text('Please log in to post an address order')),
       );
       return;
     }

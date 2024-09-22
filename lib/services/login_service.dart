@@ -15,16 +15,16 @@ class LoginService {
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['accessToken'];
-      final refreshToken = responseBody['refreshToken']; // Lưu refreshToken nếu cần
+      final refreshToken = responseBody['refreshToken']; 
       final userId = responseBody['id'];
-      final roles = responseBody['roles']; // Là danh sách chuỗi
+      final roles = responseBody['roles']; 
       
       if (token != null && userId != null && roles != null) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('accessToken', token); // Lưu accessToken
-        await prefs.setString('refreshToken', refreshToken); // Lưu refreshToken
-        await prefs.setInt('userId', userId); // Lưu userId
-        await prefs.setStringList('roles', List<String>.from(roles)); // Lưu roles là danh sách chuỗi
+        await prefs.setString('accessToken', token); 
+        await prefs.setString('refreshToken', refreshToken);
+        await prefs.setInt('userId', userId); 
+        await prefs.setStringList('roles', List<String>.from(roles)); 
       }
       return responseBody;
     } else {

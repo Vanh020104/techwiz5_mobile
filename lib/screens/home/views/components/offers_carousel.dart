@@ -29,12 +29,12 @@ class _OffersCarouselState extends State<OffersCarousel> {
       text: "New items with \nFree shipping",
       press: () {},
     ),
-    BannerMStyle2(
-      title: "Black \nfriday",
-      subtitle: "Collection",
-      discountParcent: 50,
-      press: () {},
-    ),
+    // BannerMStyle2(
+    //   title: "Black \nfriday",
+    //   subtitle: "Collection",
+    //   discountParcent: 50,
+    //   press: () {},
+    // ),
     BannerMStyle3(
       title: "Grab \nyours now",
       discountParcent: 50,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/route/route_constants.dart';
 import 'package:shop/route/router.dart' as router;
+import 'package:shop/screens/home/views/home_screen.dart';
+import 'package:shop/screens/order/views/create_page.dart';
 import 'package:shop/theme/app_theme.dart';
 
 void main() {
@@ -24,10 +26,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       onGenerateRoute: router.generateRoute,
       initialRoute: entryPointScreenRoute,
-      // routes: {
-      //    '/': (context) => LoginScreen(),
-      //   homeScreenRoute: (context) => HomeScreen(),
-      // },
+      routes: {
+        //  '/': (context) => LoginScreen(),
+        '/home': (context) => HomeScreen(),
+        createScreenRoute: (context) => CreatePage(),
+      },
     );
   }
 }

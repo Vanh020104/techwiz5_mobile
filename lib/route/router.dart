@@ -12,12 +12,14 @@ import 'package:shop/screens/designer/views/designer_appointment_detail.dart';
 import 'package:shop/screens/designer/views/create_schedule_screen.dart';
 import 'package:shop/screens/designer/views/designer_schedule_screen.dart';
 import 'package:shop/screens/designer/views/register_designer_screen.dart';
+import 'package:shop/screens/home/views/thank_you.dart';
 import 'package:shop/screens/order/views/cancel_page.dart';
 import 'package:shop/screens/order/views/complete_page.dart';
 import 'package:shop/screens/order/views/create_page.dart';
 import 'package:shop/screens/order/views/delivered_page.dart';
 import 'package:shop/screens/order/views/location.dart';
 import 'package:shop/screens/order/views/order_infor.dart';
+import 'package:shop/screens/order/views/pending_page.dart' as pending;
 import 'package:shop/screens/order/views/pending_page.dart';
 
 
@@ -262,6 +264,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const UserInfoScreen(),
       );
+    case testScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  TestPage(),
+      );
     // case currentPasswordScreenRoute:
     //   return MaterialPageRoute(
     //     builder: (context) => const CurrentPasswordScreen(),
@@ -270,6 +276,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   return MaterialPageRoute(
     //     builder: (context) => const EditUserInfoScreen(),
     //   );
+        // Define your routes
+    // case detailOrderScreenRoute:
+    //   final orderId = settings.arguments as String; 
+    //   return MaterialPageRoute(
+    //     builder: (context) => pending.OrderDetailPage(orderId: orderId),
+    //   );
+
     case notificationsScreenRoute:
       return MaterialPageRoute(
         builder: (context) => const NotificationsScreen(),
