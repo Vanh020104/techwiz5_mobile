@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressService {
-  final String apiUrl = 'http://10.0.2.2:8081/api/v1/address_order';
+  final String apiUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/address_order';
 
   Future<void> postAddressOrder(Map<String, dynamic> addressData) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -74,5 +74,6 @@ const String appoinmentScreenRoute = "appoinment";
 const String addhomedesScreenRoute = "add_home_des";
 const String appointmentListScreenRoute = "list_user_appoinment";
 const String testScreenRoute = "test_vanh";
+const String detailOrderScreenRoute = 'detailOrder';
 
 

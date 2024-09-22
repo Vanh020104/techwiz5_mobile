@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
-  static const String _baseUrl = 'http://10.0.2.2:8080/api/v1/auth/login';
+  static const String _baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/auth/login';
 
   Future<Map<String, dynamic>> login(String username, String password) async {
     final response = await http.post(

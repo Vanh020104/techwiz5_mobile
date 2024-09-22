@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shop/models/product.dart';
 
 class ProductService {
-  final String apiUrl = 'http://10.0.2.2:8080/api/v1/products';
+  final String apiUrl = 'https://techwiz-product-service-fpd5bedth9ckdgay.eastasia-01.azurewebsites.net/api/v1/products';
 
   Future<List<Product>> fetchProducts(int page, int limit) async {
     final response = await http.get(Uri.parse('$apiUrl/getAll?page=$page&limit=$limit'));

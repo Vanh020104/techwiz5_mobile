@@ -35,7 +35,7 @@ class _PendingPageState extends State<CompletePage> {
   }
 
   Future<void> fetchOrders() async {
-    final url = Uri.parse('http://10.0.2.2:8080/api/v1/orders/user/$userId/status?status=COMPLETE');
+    final url = Uri.parse('https://techwiz5-order-service-dchugggwh5g9hjdx.eastasia-01.azurewebsites.net/api/v1/orders/user/$userId/status?status=COMPLETE');
     final response = await http.get(
       url,
       headers: {

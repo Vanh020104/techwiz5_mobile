@@ -89,7 +89,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                                           },
                                         )
                                       : Image.network(
-                                          'http://10.0.2.2:8082/api/v1/product-images/imagesPost/${product.images[0].imageUrl}',
+                                          'https://techwiz-product-service-fpd5bedth9ckdgay.eastasia-01.azurewebsites.net/api/v1/product-images/imagesPost/${product.images[0].imageUrl}',
                                           height: 110,
                                           width: 110,
                                           errorBuilder: (context, error, stackTrace) {

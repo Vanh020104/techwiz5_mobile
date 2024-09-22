@@ -33,7 +33,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
     final String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!) + 'T00:00:00'; // Format date to YYYY-MM-DD and add T00:00:00
     final String apiUrl =
-        'http://10.0.2.2:8080/api/v1/appointments/day?date=$formattedDate&designerId=${widget.designerId}';
+        'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/appointments/day?date=$formattedDate&designerId=${widget.designerId}';
 
 
     try {
@@ -225,7 +225,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Future<void> fetchAppointmentDetails() async {
-    final String apiUrl = 'http://10.0.2.2:8080/api/v1/appointments/id/${widget.appointmentId}';
+    final String apiUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/appointments/id/${widget.appointmentId}';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -261,7 +261,7 @@ class _DetailScreenState extends State<DetailScreen> {
       return;
     }
 
-    final String apiUrl = 'http://10.0.2.2:8080/api/v1/appointments/updateStatus/${widget.appointmentId}';
+    final String apiUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/appointments/updateStatus/${widget.appointmentId}';
     final Map<String, dynamic> data = {
       'status': 'UNAVAILABLE',
       'userId': userId,

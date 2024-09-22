@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/models/cart_item.dart';
 
 class CartService {
-  final String baseUrl = 'http://10.0.2.2:8080';
+  final String baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/';
 
   CartService();
 

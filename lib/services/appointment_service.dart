@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentService {
-  final String _baseUrl = 'http://10.0.2.2:8080/api/v1/appointments';
+  final String _baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/appointments';
 
   Future<void> createAppointment(DateTime datetimeStart) async {
     final prefs = await SharedPreferences.getInstance();

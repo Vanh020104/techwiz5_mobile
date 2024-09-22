@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
-  static const String _baseUrl = 'http://10.0.2.2:8080/api/v1/users/';
+  static const String _baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/users/';
 
   Future<Map<String, dynamic>> getUserInfo(int userId) async {
     final prefs = await SharedPreferences.getInstance();
