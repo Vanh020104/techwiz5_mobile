@@ -54,6 +54,21 @@ class _DesignerScheduleScreenState extends State<DesignerScheduleScreen> {
     }
   }
 
+  Future<void> _deleteAppointment(int appointmentId) async {
+    try {
+      await _appointmentService.deleteAppointment(appointmentId);
+      _fetchAvailableTimes();
+    } catch (e) {
+      print('Error deleting appointment: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to delete appointment: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final String formattedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
@@ -92,43 +107,36 @@ class _DesignerScheduleScreenState extends State<DesignerScheduleScreen> {
                   final slot = availableTimes[index];
                   final String start = DateFormat('HH:mm').format(DateTime.parse(slot['datetimeStart']));
                   final String end = DateFormat('HH:mm').format(DateTime.parse(slot['datetimeEnd']));
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AppointmentDetail(
-                            appointmentId: slot['id'],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              offset: const Offset(2, 2),
-                            ),
+                  final String status = slot['status'];
+                  final bool isAvailable = status == 'AVAILABLE';
+
+                  return Card(
+                    color: isAvailable ? Colors.green[100] : Colors.grey[300],
+                    child: ListTile(
+                      title: Row(
+                          children: [
+                            const Icon(Icons.access_time, color: Colors.blueAccent), // Thêm biểu tượng đồng hồ
+                            const SizedBox(width: 8), // Khoảng cách giữa icon và text
+                            Text('$start - $end'),
                           ],
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Start: $start, End: $end',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                      ),
+                      // subtitle: Text('Status: $status'),
+                      trailing: isAvailable
+                          ? IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => _deleteAppointment(slot['id']),
+                            )
+                          : null,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppointmentDetail(
+                              appointmentId: slot['id'],
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   );
                 },

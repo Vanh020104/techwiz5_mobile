@@ -107,92 +107,100 @@ class _AppointmentDetailState extends State<AppointmentDetail> {
     final String appointmentUrl = appointmentDetail!['appointmentUrl'] ?? 'N/A';
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Appointment Detail'),
-        backgroundColor: Colors.blueAccent,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.phone),
-            onPressed: () => _makePhoneCall(userPhone),
-          ),
-          IconButton(
-            icon: const Icon(Icons.video_call),
-            onPressed: () => _makeVideoCall(userPhone),
-          ),
-        ],
+  appBar: AppBar(
+    title: const Text('Appointment Detail'),
+    backgroundColor: Colors.blueAccent,
+    actions: [
+      IconButton(
+        icon: const Icon(Icons.phone),
+        onPressed: () => _makePhoneCall(userPhone),
       ),
-      body: Padding(
+      IconButton(
+        icon: const Icon(Icons.video_call),
+        onPressed: () => _makeVideoCall(userPhone),
+      ),
+    ],
+  ),
+  body: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  title: const Text(
-                    'Date',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(formattedDate),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'Start Time',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(formattedStartTime),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'End Time',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(formattedEndTime),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'User Name',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(userName),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'User Phone',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(userPhone),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'User Email',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(userEmail),
-                ),
-                const Divider(),
-                ListTile(
-                  title: const Text(
-                    'Appointment URL',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(appointmentUrl),
-                ),
-              ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.calendar_today, color: Colors.blueAccent), // Biểu tượng lịch
+              title: const Text(
+                'Date',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(formattedDate),
             ),
-          ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.access_time, color: Colors.blueAccent), // Biểu tượng thời gian
+              title: const Text(
+                'Start Time',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(formattedStartTime),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.access_time_filled, color: Colors.blueAccent), // Biểu tượng thời gian kết thúc
+              title: const Text(
+                'End Time',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(formattedEndTime),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.person, color: Colors.blueAccent), // Biểu tượng người dùng
+              title: const Text(
+                'User Name',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(userName),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.phone, color: Colors.blueAccent), // Biểu tượng điện thoại
+              title: const Text(
+                'User Phone',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(userPhone),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.email, color: Colors.blueAccent), // Biểu tượng email
+              title: const Text(
+                'User Email',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(userEmail),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.link, color: Colors.blueAccent), // Biểu tượng link
+              title: const Text(
+                'Appointment URL',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(appointmentUrl),
+            ),
+          ],
         ),
       ),
-    );
+    ),
+  ),
+);
+
   }
 }

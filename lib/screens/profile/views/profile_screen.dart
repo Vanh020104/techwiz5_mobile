@@ -106,36 +106,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
 
-          const SizedBox(height: defaultPadding),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding / 2),
-            child: Text(
-              "Settings",
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          ProfileMenuListTile(
-            text: "List Designer",
-            svgSrc: "assets/icons/Man.svg",
-            press: () {
-              Navigator.pushNamed(context, lisrDetailsScreenRoute);
-            },
-          ),
-           ProfileMenuListTile(
-              text: "Register as Designer",
-              svgSrc: "assets/icons/Man.svg",
-              press: () {
-                Navigator.pushNamed(context, registerDesignerScreenRoute);
-              },
-            ),
-            ProfileMenuListTile(
-              text: "My consulting list",
-              svgSrc: "assets/icons/Sort.svg",
-              press: () {
-                Navigator.pushNamed(context, appointmentListScreenRoute);
-              },
-            ),
+          // const SizedBox(height: defaultPadding),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //       horizontal: defaultPadding, vertical: defaultPadding / 2),
+          //   child: Text(
+          //     "Settings",
+          //     style: Theme.of(context).textTheme.titleSmall,
+          //   ),
+          // ),
+          // ProfileMenuListTile(
+          //   text: "List Designer",
+          //   svgSrc: "assets/icons/Man.svg",
+          //   press: () {
+          //     Navigator.pushNamed(context, lisrDetailsScreenRoute);
+          //   },
+          // ),
+          //  ProfileMenuListTile(
+          //     text: "Register as Designer",
+          //     svgSrc: "assets/icons/Man.svg",
+          //     press: () {
+          //       Navigator.pushNamed(context, registerDesignerScreenRoute);
+          //     },
+          //   ),
+          //   ProfileMenuListTile(
+          //     text: "My consulting list",
+          //     svgSrc: "assets/icons/Sort.svg",
+          //     press: () {
+          //       Navigator.pushNamed(context, appointmentListScreenRoute);
+          //     },
+          //   ),
           
           const SizedBox(height: defaultPadding),
 
@@ -161,6 +161,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               svgSrc: "assets/icons/Help.svg",
               press: () {
                 Navigator.pushNamed(context, getHelpScreenRoute);
+              },
+            ),
+            ProfileMenuListTile(
+            text: "List Designer",
+            svgSrc: "assets/icons/Man.svg",
+            press: () {
+              Navigator.pushNamed(context, lisrDetailsScreenRoute);
+            },
+          ),
+           ProfileMenuListTile(
+              text: "Register as Designer",
+              svgSrc: "assets/icons/Man.svg",
+              press: () {
+                Navigator.pushNamed(context, registerDesignerScreenRoute);
+              },
+            ),
+            ProfileMenuListTile(
+              text: "My consulting list",
+              svgSrc: "assets/icons/Sort.svg",
+              press: () {
+                Navigator.pushNamed(context, appointmentListScreenRoute);
               },
             ),
            
