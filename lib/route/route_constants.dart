@@ -60,4 +60,15 @@ const String thanksForOrderScreenRoute = "thanks_order";
 const String registerDesignerScreenRoute = "register_designer";
 const String paymentScreenRoute = "payment";
 const String orderInfoScreenRoute = "order_info";
+const String locationScreenRoute = "location";
+const String penddingScreenRoute = "pendding";
+const String deliveredScreenRoute = "delivered";
+const String completedScreenRoute = "completed";
+const String cancelScreenRoute = "cancel";
+const String createScreenRoute = "create";
+const String lisrDetailsScreenRoute = "list_details";
+const String appoinmentScreenRoute = "appoinment";
+const String addhomedesScreenRoute = "add_home_des";
+const String appointmentListScreenRoute = "list_user_appoinment";
+
 
