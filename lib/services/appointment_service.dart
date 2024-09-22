@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppointmentService {
   final String _baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/api/v1/appointments';
 
-  Future<void> createAppointment(DateTime datetimeStart) async {
+  Future<void> createAppointment(DateTime datetimeStart, String appointmentUrl) async {
     final prefs = await SharedPreferences.getInstance();
     final int? designerId = prefs.getInt('userId');
     final String? token = prefs.getString('accessToken');
@@ -22,6 +22,7 @@ class AppointmentService {
 
     final Map<String, dynamic> body = {
       'datetimeStart': formattedDateTime,
+      'appointmentUrl': appointmentUrl,
       'designerId': designerId,
     };
 

@@ -69,7 +69,7 @@ class _CreateScheduleScreenState extends State<CreateScheduleScreen> {
       }
 
       try {
-        await _appointmentService.createAppointment(datetimeStart); // Gửi dữ liệu lên API
+        await _appointmentService.createAppointment(datetimeStart, ''); // Gửi dữ liệu lên API với appointmentUrl rỗng
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Appointment created successfully!'), backgroundColor: Colors.green,),
         );
