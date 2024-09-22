@@ -128,58 +128,58 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           String startTime = DateFormat('HH:mm').format(DateTime.parse(appointment['datetimeStart']));
                           String endTime = DateFormat('HH:mm').format(DateTime.parse(appointment['datetimeEnd']));
 
-                          return GestureDetector( // Wrap Card in GestureDetector
-                            onTap: () {
-                              // Navigate to the DetailScreen and pass the appointment ID
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailScreen(appointmentId: appointment['id']),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Card(
-                                elevation: 6, // Increased shadow effect
-                                color: Colors.grey[200], // Darker background for the card
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12), // Rounded corners
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Appointment',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.black87, // Darker text color
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.access_time, color: Colors.blue), // Time icon
-                                          const SizedBox(width: 8), // Spacing between icon and text
-                                          Text(
-                                            'Time: $startTime - $endTime',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold, // Bold the time text
-                                              color: Colors.black54, // Softer black text for time
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
+                          return GestureDetector(
+  onTap: () {
+    // Navigate to the DetailScreen and pass the appointment ID
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailScreen(appointmentId: appointment['id']),
+      ),
+    );
+  },
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Card(
+      elevation: 6, // Increased shadow effect
+      color: appointment['status'] == 'AVAILABLE' ? const Color.fromARGB(255, 55, 190, 60) : Colors.grey[300], // Change color based on status
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12), // Rounded corners
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Appointment',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.black87, // Darker text color
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const Icon(Icons.access_time, color: Colors.blue), // Time icon
+                const SizedBox(width: 8), // Spacing between icon and text
+                Text(
+                  'Time: $startTime - $endTime',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold, // Bold the time text
+                    color: Colors.black54, // Softer black text for time
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+);
                         },
                       ),
                     )
@@ -201,6 +201,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
 
 /// Trang detail
+
+
 
 
 class DetailScreen extends StatefulWidget {
@@ -244,6 +246,62 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
+  Future<void> scheduleAppointment() async {
+    final prefs = await SharedPreferences.getInstance();
+    final int? userId = prefs.getInt('userId');
+    final String? token = prefs.getString('accessToken');
+
+    if (userId == null || token == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('User ID or token not found. Please log in again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final String apiUrl = 'http://10.0.2.2:8080/api/v1/appointments/updateStatus/${widget.appointmentId}';
+    final Map<String, dynamic> data = {
+      'status': 'UNAVAILABLE',
+      'userId': userId,
+    };
+
+    try {
+      final response = await http.put(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: json.encode(data),
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          appointmentDetails!['status'] = 'UNAVAILABLE';
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Appointment scheduled successfully!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        print('Failed to schedule appointment: ${response.statusCode} ${response.body}');
+        throw Exception('Failed to schedule appointment: ${response.statusCode} ${response.body}');
+      }
+    } catch (error) {
+      print('Error scheduling appointment: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to schedule appointment: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -260,29 +318,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     Padding(padding: EdgeInsets.only(top: 10)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16), 
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          Navigator.pushNamed(context, addhomedesScreenRoute);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.grey[200], // Màu nền xám trắng
-                          side: const BorderSide(color: Color.fromARGB(96, 113, 112, 112), width: 1.5), // Viền đen nhạt
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20), 
-                        ),
-                        icon: const Icon(Icons.home, color: Color.fromARGB(221, 105, 104, 104)), // Icon thêm vào
-                        label: const SizedBox(
-                          width: double.infinity, 
-                          child: Center(
-                            child: Text(
-                              'Add home description',
-                              style: TextStyle(
-                                fontSize: 18,
-                                 color: Color.fromARGB(255, 90, 89, 89)
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      
                     ),
                     Expanded(
                       child: Padding(
@@ -330,25 +366,25 @@ class _DetailScreenState extends State<DetailScreen> {
                                       ],
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
-                                      children: [
-                                        const Icon(Icons.info, color: Colors.green),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          'Status: ${appointmentDetails!['status']}',
-                                          style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 40, 40, 40)),
-                                        ),
-                                      ],
-                                    ),
+                                    // Row(
+                                    //   children: [
+                                    //     const Icon(Icons.info, color: Colors.green),
+                                    //     const SizedBox(width: 8),
+                                    //     Text(
+                                    //       'Status: ${appointmentDetails!['status']}',
+                                    //       style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 40, 40, 40)),
+                                    //     ),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
                               ),
                             ),
                             const SizedBox(height: 32), // Khoảng cách giữa card và nút
                             ElevatedButton(
-                              onPressed: appointmentDetails!['status'] == 'CREATED'
+                              onPressed: appointmentDetails!['status'] == 'AVAILABLE'
                                   ? () {
-                                      print('Schedule button clicked');
+                                      scheduleAppointment();
                                     }
                                   : null,
                               style: ElevatedButton.styleFrom(

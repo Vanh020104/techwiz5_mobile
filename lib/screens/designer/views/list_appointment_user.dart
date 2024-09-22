@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop/screens/designer/views/appointment_screen.dart';
+import 'package:shop/screens/designer/views/user_appointment_detail.dart';
 
 class AppointmentListScreen extends StatefulWidget {
   const AppointmentListScreen({Key? key}) : super(key: key);
@@ -21,44 +21,42 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
     fetchAppointments();
   }
 
-  
-Future<void> fetchAppointments() async {
-  const String apiUrl = 'http://10.0.2.2:8080/api/v1/appointments/user/3?page=1&limit=10';
+  Future<void> fetchAppointments() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('accessToken');
+    final userId = prefs.getInt('userId');
 
-  // Retrieve the access token from Shared Preferences
-  final prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString('accessToken');
+    if (token == null || userId == null) {
+      print('No access token or user ID found');
+      return;
+    }
 
-  // Check if the token is not null
-  if (token == null) {
-    print('No access token found');
-    return; // Handle the case where no token is available (e.g., show a login screen)
-  }
+    final String apiUrl = 'http://10.0.2.2:8080/api/v1/appointments/user/$userId?page=1&limit=10';
 
-  try {
-    final response = await http.get(
-      Uri.parse(apiUrl),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+    try {
+      final response = await http.get(
+        Uri.parse(apiUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        setState(() {
+          appointments = data['data']['content'];
+          isLoading = false;
+        });
+      } else {
+        throw Exception('Failed to load appointments');
+      }
+    } catch (error) {
       setState(() {
-        appointments = data['data']['content'];
         isLoading = false;
       });
-    } else {
-      throw Exception('Failed to load appointments');
+      print('Error fetching appointments: $error');
     }
-  } catch (error) {
-    setState(() {
-      isLoading = false;
-    });
-    print('Error fetching appointments: $error');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -92,17 +90,17 @@ Future<void> fetchAppointments() async {
                       subtitle: Text(
                         'Start: ${appointment['datetimeStart']}\n'
                         'End: ${appointment['datetimeEnd']}\n'
-                        'Status: ${appointment['status']}',
+                        // 'Status: ${appointment['status']}',
                       ),
                       onTap: () {
-                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppointmentScreen(
-                                designerId: appointment['designerId'],
-                              ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserAppointmentDetail(
+                              appointmentId: appointment['id'],
                             ),
-                          );
+                          ),
+                        );
                       },
                     ),
                   ),
