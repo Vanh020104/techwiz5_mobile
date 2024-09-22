@@ -1,12 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shop/entry_point.dart';
 
 import 'package:shop/screens/checkout/views/payment.dart';
+import 'package:shop/screens/designer/views/add_home_des.dart';
+import 'package:shop/screens/designer/views/appointment_screen.dart';
+import 'package:shop/screens/designer/views/list_appointment_user.dart';
+import 'package:shop/screens/designer/views/list_designer.dart';
 import 'package:shop/screens/designer/views/designer_appointment_detail.dart';
 import 'package:shop/screens/designer/views/create_schedule_screen.dart';
 import 'package:shop/screens/designer/views/designer_schedule_screen.dart';
 import 'package:shop/screens/designer/views/register_designer_screen.dart';
+import 'package:shop/screens/order/views/cancel_page.dart';
+import 'package:shop/screens/order/views/complete_page.dart';
+import 'package:shop/screens/order/views/create_page.dart';
+import 'package:shop/screens/order/views/delivered_page.dart';
+import 'package:shop/screens/order/views/location.dart';
 import 'package:shop/screens/order/views/order_infor.dart';
+import 'package:shop/screens/order/views/pending_page.dart';
 
 
 import 'screen_export.dart';
@@ -108,6 +120,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const SignUpScreen(),
       );
+      case locationScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => const LocationPage(),
+      );
+       case penddingScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  PendingPage(),
+      );
     // case profileSetupScreenRoute:
     //   return MaterialPageRoute(
     //     builder: (context) => const ProfileSetupScreen(),
@@ -116,46 +136,44 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const PasswordRecoveryScreen(),
       );
-    // case verificationMethodScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const VerificationMethodScreen(),
-    //   );
-    // case otpScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const OtpScreen(),
-    //   );
-    // case newPasswordScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const SetNewPasswordScreen(),
-    //   );
-    // case doneResetPasswordScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const DoneResetPasswordScreen(),
-    //   );
-    // case termsOfServicesScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const TermsOfServicesScreen(),
-    //   );
-    // case noInternetScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const NoInternetScreen(),
-    //   );
-    // case serverErrorScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const ServerErrorScreen(),
-    //   );
-    // case signUpVerificationScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const SignUpVerificationScreen(),
-    //   );
-    // case setupFingerprintScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const SetupFingerprintScreen(),
-    //   );
-    // case setupFaceIdScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const SetupFaceIdScreen(),
-    //   );
+      case deliveredScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  DeliveredPage(),
+      );
+      case completedScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  CompletePage(),
+      );
+       case cancelScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  CancelPage(),
+      );
+     case appoinmentScreenRoute:
+  final args = settings.arguments as Map<String, dynamic>; 
+
+  return MaterialPageRoute(
+    builder: (context) => AppointmentScreen(
+      designerId: args['designerId'], 
+      
+    ),
+  );
+
+
+       case createScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  CreatePage(),
+      );
+
+      case addhomedesScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) =>  HouseDescriptionForm(),
+        );
+
+
+    case lisrDetailsScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) =>  DesignerListScreen(),
+      );
     case productDetailsScreenRoute:
   return MaterialPageRoute(
     builder: (context) {
@@ -203,6 +221,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case searchScreenRoute:
       return MaterialPageRoute(
         builder: (context) => const SearchScreen(),
+      );
+       case appointmentListScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => const AppointmentListScreen(),
       );
     // case searchHistoryScreenRoute:
     //   return MaterialPageRoute(

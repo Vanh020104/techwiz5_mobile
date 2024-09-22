@@ -79,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileCard(
             name: _name,
             email: _email,
-            imageSrc: _imageSrc.isNotEmpty ? _imageSrc : 'assets/images/avatar.jpg',
+            imageSrc: '',
 
             press: () {
               Navigator.pushNamed(context, userInfoScreenRoute);
@@ -116,17 +116,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           ProfileMenuListTile(
-            text: "Language",
-            svgSrc: "assets/icons/Language.svg",
+            text: "List Designer",
+            svgSrc: "assets/icons/Man.svg",
             press: () {
-              Navigator.pushNamed(context, selectLanguageScreenRoute);
+              Navigator.pushNamed(context, lisrDetailsScreenRoute);
             },
           ),
-          ProfileMenuListTile(
-            text: "Location",
-            svgSrc: "assets/icons/Location.svg",
-            press: () {},
-          ),
+           ProfileMenuListTile(
+              text: "Register as Designer",
+              svgSrc: "assets/icons/Man.svg",
+              press: () {
+                Navigator.pushNamed(context, registerDesignerScreenRoute);
+              },
+            ),
+            ProfileMenuListTile(
+              text: "My consulting list",
+              svgSrc: "assets/icons/Sort.svg",
+              press: () {
+                Navigator.pushNamed(context, appointmentListScreenRoute);
+              },
+            ),
+          
           const SizedBox(height: defaultPadding),
 
           
@@ -140,19 +150,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             ProfileMenuListTile(
+            text: "Location",
+            svgSrc: "assets/icons/Location.svg",
+            press: () {
+               Navigator.pushNamed(context, locationScreenRoute);
+            },
+          ),
+            ProfileMenuListTile(
               text: "Get Help",
               svgSrc: "assets/icons/Help.svg",
               press: () {
                 Navigator.pushNamed(context, getHelpScreenRoute);
               },
             ),
-            ProfileMenuListTile(
-              text: "Register as Designer",
-              svgSrc: "assets/icons/Designer.svg",
-              press: () {
-                Navigator.pushNamed(context, registerDesignerScreenRoute);
-              },
-            ),
+           
           ],
 
           

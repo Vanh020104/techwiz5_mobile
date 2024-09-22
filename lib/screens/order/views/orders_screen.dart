@@ -12,8 +12,8 @@ class OrdersScreen extends StatefulWidget {
 
 class _OrdersPageState extends State<OrdersScreen> {
   List<OrderStatus> orderStatuses = [
-    OrderStatus(status: 'Awaiting Payment', icon: Icons.account_balance_wallet),
-    OrderStatus(status: 'Processing', icon: Icons.hourglass_empty),
+    OrderStatus(status: 'Create', icon: Icons.add),
+    OrderStatus(status: 'Pending', icon: Icons.hourglass_empty),
     OrderStatus(status: 'Delivered', icon: Icons.local_shipping),
     OrderStatus(status: 'Completed', icon: Icons.check_circle),
     OrderStatus(status: 'Canceled', icon: Icons.cancel),
@@ -21,20 +21,20 @@ class _OrdersPageState extends State<OrdersScreen> {
 
   void navigateToOrderStatusPage(BuildContext context, OrderStatus status) {
     switch (status.status) {
-      case 'Awaiting Payment':
-        Navigator.pushNamed(context, orderInfoScreenRoute);
+      case 'Create':
+        Navigator.pushNamed(context, createScreenRoute);
         break;
-      case 'Processing':
-        // Navigator.pushNamed(context, '/processingOrders');
+      case 'Pending':
+        Navigator.pushNamed(context, penddingScreenRoute);
         break;
       case 'Delivered':
-        // Navigator.pushNamed(context, '/deliveredOrders');
+        Navigator.pushNamed(context, deliveredScreenRoute);
         break;
       case 'Completed':
-        // Navigator.pushNamed(context, '/completedOrders');
+        Navigator.pushNamed(context, completedScreenRoute);
         break;
       case 'Canceled':
-        // Navigator.pushNamed(context, '/canceledOrders');
+        Navigator.pushNamed(context, cancelScreenRoute);
         break;
       default:
         break;
