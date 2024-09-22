@@ -1,8 +1,6 @@
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class AppointmentService {
   final String _baseUrl = 'http://10.0.2.2:8080/api/v1/appointments';
@@ -113,4 +111,31 @@ class AppointmentService {
     }
   }
 
+  Future<void> deleteAppointment(int appointmentId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('accessToken');
+
+    if (token == null) {
+      throw Exception('Access token not found');
+    }
+
+    final String url = '$_baseUrl/$appointmentId';
+
+    try {
+      final response = await http.delete(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to delete appointment: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error deleting appointment: $e'); // In ra lỗi trong console
+      throw Exception('Error deleting appointment: $e');
+    }
+  }
 }
