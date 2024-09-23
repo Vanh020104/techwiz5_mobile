@@ -73,7 +73,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         isLoading = false;
         hasData = false;
       });
-      print('Error fetching appointments: $error');
+      print('Error fetching appointments');
     }
   }
 
@@ -242,7 +242,7 @@ class _DetailScreenState extends State<DetailScreen> {
       setState(() {
         isLoading = false;
       });
-      print('Error fetching appointment details: $error');
+      print('Error fetching appointment details');
     }
   }
 
@@ -292,10 +292,10 @@ class _DetailScreenState extends State<DetailScreen> {
         throw Exception('Failed to schedule appointment: ${response.statusCode} ${response.body}');
       }
     } catch (error) {
-      print('Error scheduling appointment: $error');
+      print('Error scheduling appointment');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to schedule appointment: $error'),
+          content: Text('Failed to schedule appointment'),
           backgroundColor: Colors.red,
         ),
       );

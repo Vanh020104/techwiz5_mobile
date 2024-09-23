@@ -40,7 +40,7 @@ class AppointmentService {
         throw Exception('Failed to create appointment: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Error creating appointment: $e');
+      throw Exception('Error creating appointment');
     }
   }
 
@@ -77,8 +77,8 @@ class AppointmentService {
         throw Exception('Failed to fetch available slots: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error fetching available slots: $e'); // In ra lỗi trong console
-      throw Exception('Error fetching available slots: $e');
+      print('Error fetching available slots'); // In ra lỗi trong console
+      throw Exception('Error fetching available slots');
     }
   }
 
@@ -107,8 +107,8 @@ class AppointmentService {
         throw Exception('Failed to fetch appointment detail: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error fetching appointment detail: $e'); // In ra lỗi trong console
-      throw Exception('Error fetching appointment detail: $e');
+      print('Error fetching appointment detail'); // In ra lỗi trong console
+      throw Exception('Error fetching appointment detail');
     }
   }
 
@@ -135,8 +135,8 @@ class AppointmentService {
         throw Exception('Failed to delete appointment: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error deleting appointment: $e'); // In ra lỗi trong console
-      throw Exception('Error deleting appointment: $e');
+      print('Error deleting appointment'); // In ra lỗi trong console
+      throw Exception('Error deleting appointment');
     }
   }
 }

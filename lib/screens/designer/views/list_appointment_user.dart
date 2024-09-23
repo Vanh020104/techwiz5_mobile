@@ -54,7 +54,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
       setState(() {
         isLoading = false;
       });
-      print('Error fetching appointments: $error');
+      print('Error fetching appointments');
     }
   }
 
