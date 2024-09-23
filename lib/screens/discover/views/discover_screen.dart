@@ -34,7 +34,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   }
 
   void _navigateToBookmarkScreen(int categoryId) {
-  print('Navigating to BookmarkScreen with categoryId: $categoryId'); // In ra để kiểm tra
+  print('Navigating to BookmarkScreen with categoryId: $categoryId'); 
   Navigator.pushNamed(
     context,
     bookmarkScreenRoute,
