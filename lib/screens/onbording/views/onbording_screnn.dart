@@ -29,27 +29,27 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_1.png",
       title: "Get those shopping \nbags filled",
       description:
-          "Add any item you want to your cart, or save it on your wishlist, so you don’t miss it in your future purchases.",
+          "You can add products to your shopping cart.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-2.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_2.png",
       title: "Fast & secure \npayment",
-      description: "There are many payment options available for your ease.",
+      description: "You can pay upon receipt.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-3.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_3.png",
-      title: "Package tracking",
+      title: "View your order information.",
       description:
-          "In particular, Shoplon can pack your orders, and help you seamlessly manage your shipments.",
+          "Manage your orders by order status.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-4.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_4.png",
-      title: "Nearby stores",
+      title: "Consulting, scheduling",
       description:
-          "Easily track nearby shops, browse through their items and get information about their prodcuts.",
+          "You can view the list of designers, schedule a consultation with them, or video call for consultation.",
     ),
   ];
 

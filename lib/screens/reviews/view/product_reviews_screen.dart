@@ -8,7 +8,7 @@ class ProductReviewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const BuyFullKit(images: [
       "assets/screens/reviews.png",
-      "assets/screens/Add review rate.png"
+      // "assets/screens/Add review rate.png"
     ]);
   }
 }

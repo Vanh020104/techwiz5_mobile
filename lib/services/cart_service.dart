@@ -5,11 +5,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/models/cart_item.dart';
 
 class CartService {
-  final String baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net/';
+  final String baseUrl = 'https://techwiz5-user-service-hbereff9dmexc6er.eastasia-01.azurewebsites.net';
 
   CartService();
+// Lấy token từ SharedPreferences
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('accessToken');
+  }
 
-  // Thêm sản phẩm vào giỏ hàng
   Future<void> addToCart(CartItem cartItem) async {
     final token = await getToken();
     if (token == null) {
@@ -31,11 +35,7 @@ class CartService {
     }
   }
 
-  // Lấy token từ SharedPreferences
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('accessToken');
-  }
+  
 
   // Lấy dữ liệu giỏ hàng
   Future<List<Map<String, dynamic>>> getCartData(int userId) async {

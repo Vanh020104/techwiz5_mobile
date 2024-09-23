@@ -83,7 +83,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                 } else {
                   final userId = userIdSnapshot.data;
                   if (userId == null) {
-                    return const Center(child: Text('User ID is null'));
+                    return const Center(child: Text('Please login!'));
                   }
                   return CartButton(
                     price: totalPrice,
@@ -92,7 +92,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                     subTitle: "Total price",
                     press: () async {
                       final cartItem = CartItem(
-                        userId: userId.toString(), // Sử dụng userId thực tế
+                        userId: userId.toString(), 
                         productId: widget.product.productId.toString(),
                         quantity: quantity,
                       );
