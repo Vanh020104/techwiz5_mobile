@@ -248,7 +248,7 @@ class _RegisterDesignerScreenState extends State<RegisterDesignerScreen> {
           print("Failed to submit profile. Status code: ${response.statusCode}");
         }
       } catch (error) {
-        print("Error submitting profile: $error");
+        print("Error submitting profile");
       }
     }
   }

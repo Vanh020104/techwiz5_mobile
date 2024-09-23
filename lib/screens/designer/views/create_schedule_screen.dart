@@ -76,7 +76,7 @@ class _CreateScheduleScreenState extends State<CreateScheduleScreen> {
         Navigator.pop(context); // Quay lại trang trước đó
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to create appointment: $e')),
+          SnackBar(content: Text('Failed to create appointment')),
         );
       }
     } else {

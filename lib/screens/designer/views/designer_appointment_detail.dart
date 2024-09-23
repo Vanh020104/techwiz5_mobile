@@ -31,10 +31,10 @@ class _AppointmentDetailState extends State<AppointmentDetail> {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching appointment detail: $e');
+      print('Error fetching appointment detail');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to fetch appointment detail: $e'),
+          content: Text('Failed to fetch appointment detail'),
           backgroundColor: Colors.red,
         ),
       );

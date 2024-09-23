@@ -44,10 +44,10 @@ class _DesignerScheduleScreenState extends State<DesignerScheduleScreen> {
         availableTimes = slots;
       });
     } catch (e) {
-      print('Error fetching available times: $e'); // In ra lỗi trong console
+      print('Error fetching available times'); // In ra lỗi trong console
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to fetch available times: $e'),
+          content: Text('Failed to fetch available times'),
           backgroundColor: Colors.red,
         ),
       );
@@ -59,10 +59,10 @@ class _DesignerScheduleScreenState extends State<DesignerScheduleScreen> {
       await _appointmentService.deleteAppointment(appointmentId);
       _fetchAvailableTimes();
     } catch (e) {
-      print('Error deleting appointment: $e');
+      print('Error deleting appointment');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to delete appointment: $e'),
+          content: Text('Failed to delete appointment'),
           backgroundColor: Colors.red,
         ),
       );

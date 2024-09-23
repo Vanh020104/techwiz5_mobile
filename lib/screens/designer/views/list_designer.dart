@@ -42,7 +42,7 @@ class _DesignerListScreenState extends State<DesignerListScreen> {
       setState(() {
         isLoading = false;
       });
-      print('Error fetching designers: $error');
+      print('Error fetching designers');
     }
   }
 
